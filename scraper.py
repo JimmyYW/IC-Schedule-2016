@@ -87,13 +87,20 @@ def get_db_items_from_listing(row):
     dept = get_dept(cells[INDEX_DEPT].get_text(), cells[INDEX_DEPT].get_text())
 
     # TODO: Get full description for course. Currently uses ICC credit info.
-    # FIXME: Variable credits break the code! What value should be inserted in that case?
+    # Variable credits are stored as -1 in a dirty fix.
+    try:
+        credit = float(cells[INDEX_CREDITS].get_text())
+    except ValueError:
+        credit = -1
     course = get_course(dept, int(cells[INDEX_COURSENUM].get_text()), cells[INDEX_NAME].get_text(),
-                        float(cells[INDEX_CREDITS].get_text()), cells[INDEX_ATTRS].get_text())
+                        credit, cells[INDEX_ATTRS].get_text())
 
     section = get_section(course, cells[INDEX_PROF].get_text(), int(cells[INDEX_CRN].get_text()))
 
     times = get_times_from_cells(cells)
+
+    if times is None:
+        return section
 
     s2ts = get_section_to_time(section, times)
 
@@ -107,8 +114,8 @@ def get_section_to_time(section, times):
     :param times: list of time objects from db
     :return: list of SectionToTime objects
     """
-    s2ts = SectionToTime.query.filter_by(sectionId=section.id)
-    if s2ts is not None:
+    s2ts = SectionToTime.query.filter_by(sectionId=section.id).all()
+    if len(s2ts) > 0:
         return s2ts
     s2ts = []
     for t in times:
@@ -129,34 +136,39 @@ def get_times_from_cells(cells):
     days = cells[INDEX_DAYS].get_text()
     times = cells[INDEX_TIMES].get_text().split("-")
 
-    starttime = datetime.strptime(times[0], "%I:%M %p").time()
-    endtime = datetime.strptime(times[1], "%I:%M %p").time()
+    try:
+        starttime = datetime.strptime(times[0], "%I:%M %p").time()
+        endtime = datetime.strptime(times[1], "%I:%M %p").time()
 
-    times = []
+        times = []
 
-    for d in days:
-        if d == "U":
-            d = 0
-        elif d == "M":
-            d = 1
-        elif d == "T":
-            d = 2
-        elif d == "W":
-            d = 3
-        elif d == "R":
-            d = 4
-        elif d == "F":
-            d = 5
-        else:
-            d = 6
-        t = Time.query.filter_by(timeStart=starttime, timeEnd=endtime, day=d).first()
-        if t is None:
-            t = Time(starttime, endtime, d)
-            db.session.add(t)
-            db.session.commit()
-        times.append(t)
+        for d in days:
+            if d == "U":
+                d = 0
+            elif d == "M":
+                d = 1
+            elif d == "T":
+                d = 2
+            elif d == "W":
+                d = 3
+            elif d == "R":
+                d = 4
+            elif d == "F":
+                d = 5
+            else:
+                d = 6
+            t = Time.query.filter_by(timeStart=starttime, timeEnd=endtime, day=d).first()
+            if t is None:
+                t = Time(starttime, endtime, d)
+                db.session.add(t)
+                db.session.commit()
+            times.append(t)
 
-    return times
+        return times
+
+    except ValueError:
+        # occurs when time is TBA
+        return None
 
 
 def scrape_web(html):
@@ -173,7 +185,8 @@ def scrape_web(html):
         # catch sparse rows, which add times to previously accessed section
         if r.get_text().startswith("\n\xa0\n\xa0\n\xa0\n\xa0"):
             times = get_times_from_cells(r.find_all("td"))
-            get_section_to_time(section, times)
+            if times is not None:
+                get_section_to_time(section, times)
         else:
             section = get_db_items_from_listing(r)
 
