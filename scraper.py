@@ -192,7 +192,7 @@ def scrape_web(html):
 
 
 def main():
-    file = open("untitledCP.html")
+    file = open("ALLtheclasses.html")
     scrape_web(file.read())
 
 
