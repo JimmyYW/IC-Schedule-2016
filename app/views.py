@@ -15,9 +15,6 @@ def landing():
     return render_template('landing.html')
 
 
-
-
-
 @app.route('/index')
 def index():
     deptList = Dept.query.order_by('name')
