@@ -1,5 +1,5 @@
-from app.models import Course, SectionToTime, Time, Section
-import copy
+from app.models import Dept, Course, SectionToTime, Time, Section
+import time
 
 """
 ALGORITHM
@@ -122,10 +122,22 @@ class Schedulizer:
         maxes = [len(self.cdict[c]) for c in self.clist]
         self.recursive_looping_sucks(maxes, list())
 
+    def print_schedules(self):
+        for sched in self.sched_list:
+            print("SCHEDULE")
+            for section in sched:
+                print(section.crn, section.course.dept.abbr, section.course.number, sep="\t")
+                s2ts = SectionToTime.query.filter_by(sectionId=section.id)
+                for s2t in s2ts:
+                    t = (Time.query.get(s2t.timeId))
+                    print("\t", t.day, t.timeStart, t.timeEnd, sep="\t")
+
 
 def has_conflict(time1, time2):
+    if time1 is None or time2 is None:
+        return False
     # DID YOU KNOW YOU CAN CHAIN BOOLEAN EXPRESSIONS LIKE THIS IN PYTHON????? MY MATH BRAIN IS SO SATISFIED
-    if (time1.timeStart <= time2.timeStart <= time1.timeEnd or time2.timeStart <= time1.timeStart <= time2.timeEnd)\
+    elif (time1.timeStart <= time2.timeStart <= time1.timeEnd or time2.timeStart <= time1.timeStart <= time2.timeEnd)\
             and (time1.day == time2.day):
         return True
     else:
@@ -133,10 +145,28 @@ def has_conflict(time1, time2):
 
 
 def main():
-    clist = Course.query.all()
+    """
+    A sampling of courses to test scheduling. WRTG 106 for a plethora of section options, COMP 475 (senior project)
+    to test sections with no timeslots. Computation of 1722 schedules takes under 2 seconds. Holy moley.
+    Schedules can be printed by uncommenting the final line of main, but it's not pretty and takes a while.
+    Did I mention there are 1722 of them????
+    """
+    wrtg = Dept.query.filter_by(abbr="WRTG").first()
+    comp = Dept.query.filter_by(abbr="COMP").first()
+    clist = list()
+    clist.append(Course.query.filter_by(deptId=wrtg.id, number=10600).first())
+    clist.append(Course.query.filter_by(deptId=comp.id, number=17100).first())
+    clist.append(Course.query.filter_by(deptId=comp.id, number=10500).first())
+    clist.append(Course.query.filter_by(deptId=comp.id, number=10600).first())
+    clist.append(Course.query.filter_by(deptId=comp.id, number=47500).first())
+    time.clock()
     sch = Schedulizer(clist)
     sch.generate_schedules()
-    print(sch.sched_list)
+    duration = time.clock()
+    print(duration, "seconds")
+    print("Found", len(sch.sched_list), "schedules.")
+    # Uncomment if you want to see an ungodly mess.
+    # sch.print_schedules()
 
 if __name__ == "__main__":
     main()

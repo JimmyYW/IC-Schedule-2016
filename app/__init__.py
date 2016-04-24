@@ -5,6 +5,9 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
-# must go at end of file to avoid import loop
-from app import views, models
+
+# from app import views, models !!This line from last year
+# must go at end of file to avoid import loop.
+from app import models
+# TODO: implement views.py and import here
 
