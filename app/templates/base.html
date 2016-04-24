@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<meta http-equiv="department-Type" department="text/html; charset=utf-8">-->
+		<title>IC Schedule | {% block title %}{% endblock %}</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css')}}" type="text/css">
+        <link rel="stylesheet" href="../static/bootstrap.min.css"
+                type="text/css">
+        <script type="text/javascript" src="../static/jquery.js"></script>
+        <script type="text/javascript" src="../static/bootstrap.min.js"></script>
+    </head>
+    <body>
+		<header id="header">
+			<div class="innertube">
+                <a href="/index"><img src="{{ url_for('static', filename = 'img/header.jpg') }}"></a>
+                <p><a href="/index"><img src="../static/img/classes.jpg" href="/index" alt="Classes Button"></a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="/schedule"><img src="../static/img/schedule.jpg" alt="Schedule Button" href="/schedule"></a></p>
+			</div>
+		</header>
+
+		<div id="wrapper">
+			<main>
+				<div id="department" data-spy="scroll" data-target="#nav">
+					<div class="innertube">
+                        {% block dept_content %}{% endblock %}
+							<!--<p>Accounting</p>
+							<p>Anthropology</p>
+							<p>Arabic</p>
+							<p>Art</p>
+							<p>Art History</p>
+							<p>Biochemistry</p>
+							<p>Biology</p>
+							<p>Buisness-Grad</p>
+							<p>Accounting</p>
+							<p>Anthropology</p>
+							<p>Arabic</p>
+							<p>Art</p>
+							<p>Art History</p>
+							<p>Biochemistry</p>
+							<p>Biology</p>
+							<p>Buisness-Grad</p>-->
+					</div>
+				</div>
+			</main>
+
+			{% block sideNav %}{% endblock %}
+
+			<nav id="classdiv">
+				<div class="innertube">
+					{% block course_content %}{% endblock %}
+				</div>
+			</nav>
+
+		</div>
+		<footer id="footer">
+			<div class="innertube">
+				<p><img src="../static/img/footer.jpg" alt="Scheduled Classes Footer"></p>
+                {% block selected_classes %}{% endblock %}
+			</div>
+		</footer>
+    </body>
+</html>

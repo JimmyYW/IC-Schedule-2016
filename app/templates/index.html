@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block sideNav %}
+<nav id="nav">
+    <div class="innertube">
+        <h3> </h3>
+        <ul>
+            <li><a href="#A">A</a></li>
+            <li><a href="#B">B</a></li>
+            <li><a href="#C">C</a></li>
+            <li><a href="#D">D</a></li>
+            <li><a href="#E">E</a></li>
+            <li><a href="#F">F</a></li>
+            <li><a href="#G">G</a></li>
+            <li><a href="#H">H</a></li>
+            <li><a href="#I">I</a></li>
+            <li><a href="#J">J</a></li>
+            <li><a href="#L">L</a></li>
+            <li><a href="#M">M</a></li>
+            <li><a href="#O">O</a></li>
+            <li><a href="#P">P</a></li>
+            <li><a href="#R">R</a></li>
+            <li><a href="#S">S</a></li>
+            <li><a href="#T">T</a></li>
+            <li><a href="#W">W</a></li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+{% block dept_content %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css')}}" type="text/css">
+
+
+    {% for dept in depts %}
+        <a href="#Department" id="{{ dept.name[0] }}">{{ dept.name }}</a>
+    {% endfor %}
+
+{% endblock %}
+
+{% block course_content %}
+    <ul>
+    {% for course in courses %}
+        <li><button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#c{{ course.id }}">{{ course.name }}</button></li>
+    {% endfor %}
+    </ul>
+    {% for course in courses %}
+        <div class="modal fade" id="c{{ course.id }}" tabindex="-1" role="dialog" aria-labelledby="clabel{{ course.id }}">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close btn btn-primary btn-sm" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="clabel{{ course.id }}">{{ course.name }}</h4>
+              </div>
+              <div class="modal-body">
+                  <h2>{{ course.name }}</h2>
+                  <p>{{ course.desc }}</p>
+                  <ul>
+                    <!--this is probably the hackiest way to do this ever but oh well-->
+                      {% for section in sections %}
+                          {% if section.courseId == course.id %}
+                            <li>{{ section.crn }}</li>
+                          {% endif %}
+                      {% endfor %}
+                  </ul>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id=c{{ course.id }}">Add class</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+{% endblock %}

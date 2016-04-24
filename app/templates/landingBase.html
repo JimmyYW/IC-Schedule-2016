@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IC Schedule | {% block title %}{% endblock %}</title>
+        <!--<link rel="stylesheet" href="../static/bootstrap.min.css" type="text/css">-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'landingPageStyle.css')}}" type="text/css">
+    </head>
+    <body>
+    <section id="intro" class="top">
+        <nav class="navbar navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                     <a class="navbar-brand" href="/"><p>IC SCHEDULE pre-alpha</p></a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#about"><p>About</p></a></li>
+                    <!--<li><a href="#howitworks"><p>How it works</p></a></li>-->
+                    <li><a href="#courseresources"><p>Course Resources</p></a></li>
+                    <li><a href="/index"><p>Sign In/Join</p></a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 voffset150">
+                    <h1 class="text-center">Welcome to IC Schedule!</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="text-center">Description/Announcement goes here</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>About Section</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--&lt;!&ndash; howitwork Section &ndash;&gt;-->
+    <!--<section id="howitworks" class="howitworks">-->
+        <!--<div class="container">-->
+            <!--<div class="row">-->
+                <!--<div class="col-lg-12">-->
+                    <!--<h1>Section</h1>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</section>-->
+
+    <!-- courseresources Section -->
+    <section id="courseresources" class="courseresources">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Section2</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background-color: gainsboro">footer</footer>
+
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/bootstrap.min.js"></script>
+     <script type="text/javascript" src="../static/main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+some useful commands
+
+git add <filename>: stages file for commit. use -A to add all
+git status: see files you have modified and staged
+git log (--pretty=oneline)
+git checkout <filename>: reverts to file state from git
+git reset HEAD <filename>: unstages file, but does not alter it
+git revert [COMMIT HASH NAME]: undo the commit and get to the previous commit state
+git rm <filename>: remove file from add list (need to do if you use the command line!)
+
+
+BRANCHING!!
+
+git checkout -b <newbranchname>: create new branch
+git checkout <branchname>: switch branches
+git merge <branchname>: merge <branch> INTO current working branch
+git branch: list all branches
+
+good branch etiquette: everything in master is stable, everything on dev is merged from individuals' feature branches before being reconciled and merged to master

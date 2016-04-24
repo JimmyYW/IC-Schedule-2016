@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IC Schedule | {% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="../static/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'baseStyle.css')}}" type="text/css">
+    </head>
+    <body>
+        <div id="wrapper">
+
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand"><a href="#">IC SCHEDULE pre-alpha</a></li>
+                    <li><a href="#">Course Resources</a></li>
+                    <li><a href="#">How it Works</a></li>
+                    <li><a href="/">Sign Out</a></li>
+                </ul>
+            </div>
+
+            <div id="page-content-wrapper">
+                <nav class="navbar subNav sharp" style="z-index:1000">
+                    <div class="navbar-header">
+                        <a href="#menu-toggle" id="menu-toggle">
+                            <img alt="Brand" src="{{ url_for('static', filename = 'img/glyphicons-menu-hamburger.png')}}">
+                        </a>
+                    </div>
+                    <div class="container">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a href="#about"><p>class</p></a></li>
+                            <li role="presentation"><a href="#courseresources"><p>event</p></a></li>
+                            <li role="presentation"><a href="/index"><p>schedule</p></a></li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <div class="full container-fluid" style="background-color: #f8f8f8; padding-top:2%">
+
+
+
+                    <div class="row" id="searchView" style="display: none">
+                        <div class= "col-md-6 col-md-offset-3 " style="position: absolute; padding-bottom:1%; padding-top:15%;" >
+                            <div class="input-group" >
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Go!</button>
+                                    </span>
+                            </div><!-- /input-group -->
+                        </div>
+                    </div>
+
+                    <div class="row" id="listView" >
+                        <div class="no-float" style="display:table-cell; width: 5%">
+                            <ul class="sideLetter text-center" style="padding: 0px;">
+                                <li><a href="#A">A</a></li>
+                                <li><a href="#B">B</a></li>
+                                <li><a href="#C">C</a></li>
+                                <li><a href="#D">D</a></li>
+                                <li><a href="#E">E</a></li>
+                                <li><a href="#F">F</a></li>
+                                <li><a href="#G">G</a></li>
+                                <li><a href="#H">H</a></li>
+                                <li><a href="#I">I</a></li>
+                                <li><a href="#J">J</a></li>
+                                <li><a href="#L">L</a></li>
+                                <li><a href="#M">M</a></li>
+                                <li><a href="#O">O</a></li>
+                                <li><a href="#P">P</a></li>
+                                <li><a href="#R">R</a></li>
+                                <li><a href="#S">S</a></li>
+                                <li><a href="#T">T</a></li>
+                                <li><a href="#W">W</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3  no-float" style="display: table-cell; background: white; overflow: auto; height: 100%; padding-left: 0px; padding-right: 0px;">
+                            <div class="innertube">
+                                 <ul style="padding: 0px">
+                                     <li><button class="btn bc2 btn-block sharp" type="button" data-toggle="modal" data-target="#1">Accounting</button></li>
+                                     <li><button class="btn bc2 btn-block sharp" type="button" data-toggle="modal" data-target="#2">Anthropology</button></li>
+                                     <li><button class="btn bc2 btn-block sharp" type="button" data-toggle="modal" data-target="#3">Arabic</button></li>
+                                     <li><button class="btn bc2 btn-block sharp" type="button" data-toggle="modal" data-target="#4">Art</button></li>
+                                     <li><button class="btn bc2 btn-block sharp" type="button" data-toggle="modal" data-target="#5">Art History</button></li>
+                                     <li><button class="btn bc2 btn-block sharp" type="button" data-toggle="modal" data-target="#6">Astronomy</button></li>
+                                     <li><button class="btn bc2 btn-block sharp" type="button" data-toggle="modal" data-target="#7">Biochemistry</button></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="width: 1%; display: table-cell">
+                        </div>
+                        <div class="col-md-7 no-float" style="display: table-cell; background: white; overflow: auto; height: 100%; padding-left: 0px; padding-right: 0px;">
+                            <div class="innertube">
+                                 <ul style="padding: 0px">
+                                     <li><button class="btn bc btn-block sharp" type="button" data-toggle="modal" data-target="#1">EX1</button></li>
+                                     <li><button class="btn bc btn-block sharp" type="button" data-toggle="modal" data-target="#2">EX2</button></li>
+                                     <li><button class="btn bc btn-block sharp" type="button" data-toggle="modal" data-target="#3">EX3</button></li>
+                                     <li><button class="btn bc btn-block sharp" type="button" data-toggle="modal" data-target="#4">EX4</button></li>
+                                     <li><button class="btn bc btn-block sharp" type="button" data-toggle="modal" data-target="#5">EX5</button></li>
+                                     <li><button class="btn bc btn-block sharp" type="button" data-toggle="modal" data-target="#6">EX6</button></li>
+                                     <li><button class="btn bc btn-block sharp" type="button" data-toggle="modal" data-target="#7">EX7</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style=" display: table-cell">
+                        </div>
+                    </div><!--End of row-->
+                </div><!--End of full inner -->
+            </div><!--End of paper context wrapper -->
+        </div><!--End of wrapper-->
+
+        <div id="tab" class="col-md-offset-11 col-md-1">
+            <!--<button type="button" class="btn btn-success btn-block">Search</button>-->
+              <h5 class="text-center">Mode</h5>
+        </div>
+
+        <div id="slideout" class="col-md-offset-8 col-md-3 col-sm-12">
+                <div id="slideoutTab">
+                    <h5 class="text-center">Course Cart</h5>
+                </div>
+                <div id="slideoutinner">
+                     <ul>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                         <li><p>test</p></li>
+                     </ul>
+                </div>
+        </div>
+
+        <script type="text/javascript" src="../static/jquery.js"></script>
+        <script type="text/javascript" src="../static/bootstrap.min.js"></script>
+        <script>
+            var slideoutinner = $( "#slideoutinner" );
+            var search = $("#searchView");
+            var list = $("#listView");
+
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                if($("#wrapper").hasClass("toggled")){
+                     $("#wrapper").removeClass("toggled");
+                }else{
+                     $("#wrapper").addClass("toggled");
+                }
+            });
+
+            // Bind the link to toggle the slide.
+            $( "#slideoutTab" ).click(function( e ){
+                    // Prevent the default event.
+                    e.preventDefault();
+                    // Toggle the slide based on its current
+                    // visibility.
+                    if (slideoutinner.is( ":visible" )){
+                        // Hide - slide up.
+                        console.log("hide");
+                        slideoutinner.slideUp( 300 );
+                    } else {
+                        console.log("show");
+                        // Show - slide down.
+                        slideoutinner.slideDown( 300 );
+                    }
+            });
+
+            $( "#tab" ).click(function( e ){
+                    // Prevent the default event.
+                    e.preventDefault();
+                    // Toggle the slide based on its current
+                    // visibility.
+                    if (list.is( ":visible" )){
+                        list.hide(500);
+                        search.show(300);
+                    }else{
+                        search.hide(300);
+                        list.show(500);
+                    }
+            });
+
+            $(document).on("click", function(event){
+                if($("#wrapper").hasClass("toggled")) {
+                    if($("#menu-toggle") !== event.target && !$("#menu-toggle").has(event.target).length){
+                        if (event.target.id !== "sidebar-wrapper") {
+                            $("#wrapper").removeClass("toggled");
+                        }
+                    }
+                }
+                if(slideoutinner.is( ":visible" )) {
+                    var $trigger = $("#slideoutTab");
+                    var $triggerT = $("#slideoutinner");
+                    if ("slideoutTab" !== event.target.id && !$trigger.has(event.target).length) {
+                        if ($triggerT !== event.target && !$triggerT.has(event.target).length) {
+                            slideoutinner.slideUp(300);
+                        }
+                    }
+                }
+            });
+
+            $('#menu-toggle').modal(options);
+
+        </script>
+    </body>
+</html>
