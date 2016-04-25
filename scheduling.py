@@ -123,14 +123,15 @@ class Schedulizer:
         self.recursive_looping_sucks(maxes, list())
 
     def print_schedules(self):
-        for sched in self.sched_list:
-            print("SCHEDULE")
-            for section in sched:
+        for i in range(len(self.sched_list)):
+            print("SCHEDULE", i+1)
+            for section in self.sched_list[i]:
                 print(section.crn, section.course.dept.abbr, section.course.number, sep="\t")
                 s2ts = SectionToTime.query.filter_by(sectionId=section.id)
                 for s2t in s2ts:
                     t = (Time.query.get(s2t.timeId))
-                    print("\t", t.day, t.timeStart, t.timeEnd, sep="\t")
+                    days = ["U", "M", "T", "W", "R", "F", "S"]
+                    print("\t", days[t.day], t.timeStart, t.timeEnd, sep="\t")
 
 
 def has_conflict(time1, time2):
@@ -158,7 +159,6 @@ def main():
     clist.append(Course.query.filter_by(deptId=comp.id, number=17100).first())
     clist.append(Course.query.filter_by(deptId=comp.id, number=10500).first())
     clist.append(Course.query.filter_by(deptId=comp.id, number=10600).first())
-    clist.append(Course.query.filter_by(deptId=comp.id, number=47500).first())
     time.clock()
     sch = Schedulizer(clist)
     sch.generate_schedules()
@@ -166,7 +166,7 @@ def main():
     print(duration, "seconds")
     print("Found", len(sch.sched_list), "schedules.")
     # Uncomment if you want to see an ungodly mess.
-    # sch.print_schedules()
+    sch.print_schedules()
 
 if __name__ == "__main__":
     main()
