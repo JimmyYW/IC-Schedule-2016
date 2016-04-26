@@ -76,7 +76,7 @@ function getJs(detpId) {
             var two = ')"data-target="#c';
             var three = '">';
             var four = '</button></li>';
-            var final = one + data.listByDeptId[i] + two + data.listByDeptId[i] +three + data.listByDept[i] + four;
+            var final = one + data.listByDeptId[i] + two + "c" + three + data.listByDept[i] + four;
             listText+=final;
         }
         $(listText).appendTo("#courseList");
@@ -84,14 +84,37 @@ function getJs(detpId) {
     });
 }
 
-function showSection(getcourseId){
+function showSection(getcourseIdin){
     $("#sectionListModal").empty();
     var md = "";
     $.getJSON($SCRIPT_ROOT + '/_load_section', {
-        getcourseId: courseId
+        getcourseId: getcourseIdin
     }, function (data) {
+        var crn= data.listOfSectionsCRNOut;
+        var prf= data.listOfSectionsProfOut;
+        var c = data.courseNumOut;
+        var cc = data.courseCredOut;
+           var se = '<div class="modal fade" id="c" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">' +
+                        '<div class="modal-dialog" role="document">' +
+                            '<div class="modal-content">'+
+                                '<div class="modal-header">' +
+                                    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span aria-hidden="true">&times;</span></button>' +
+                                    '<h4 class="modal-title" id="myModalLabel">'+data.courseName+ '</h4>' +
+                                '</div>'+
+                                '<div class="modal-body">'+
+                                    '<h3>'+'CRNs: '+crn+
+                                          ' Profs: '+prf+'</h3>'+
+                                '</div>'+
+                                '<div class="modal-footer">'+
+                                    '<button type="button" class="btn btn-default" data-dismiss="modal">Back</button>'+
+                                    '<button type="button" class="btn btn-primary">Add to Cart</button>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>';
 
-
+    $(se).appendTo("#sectionListModal");
+        $('#c').modal('show');
     });
 }
 

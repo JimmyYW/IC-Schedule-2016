@@ -100,26 +100,8 @@
                         </div>
 
                         <div id="sectionListModal">
-
                         </div>
 
-                        <div class="modal fade" id="c9" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h3>Modal Body</h3>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Back</button>
-                                        <button type="button" class="btn btn-primary">Add to Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                     {% endblock %}
 
@@ -136,6 +118,7 @@
                 </div><!--End of full inner -->
             </div><!--End of paper context wrapper -->
         </div><!--End of wrapper-->
+
 
         <div id="slideout" class="col-md-offset-8 col-md-3 col-sm-12">
                 <div id="slideoutTab">
@@ -161,16 +144,6 @@
                      </ul>
                 </div>
         </div>
-
-
-        <script type=text/javascript>
-
-
-
-
-
-        </script>
-
 
         <script type=text/javascript>$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
         <script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
